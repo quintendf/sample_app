@@ -62,4 +62,14 @@ describe "Static pages" do
         :text => "Ruby on Rails Tutorial Sample App | Contact")
     end
   end
+
+  describe "for signed-in users" do
+    let(:user) {FactoryGirl.create(:user) }
+    before do
+      FactoryGirl.create(:micropost, user: user, content: "Lorem Ipsum")
+      FactoryGirl.create(:micropost, user: user, content: "Dolor sit amet")
+      sign_in user
+      visit root_path
+    end
+  end
 end
